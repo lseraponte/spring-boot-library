@@ -11,6 +11,8 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     Book save(Book entity);
 
     @Override
-    void delete(Book entity);
+    void deleteById(Long id);
+
+    Book findByTitleAndAuthor_id(String title, long id);
 
 }

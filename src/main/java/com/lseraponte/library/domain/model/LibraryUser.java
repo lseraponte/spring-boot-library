@@ -1,24 +1,27 @@
 package com.lseraponte.library.domain.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @Entity
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class LibraryUser {
 
     @Id
-    @GeneratedValue
-    @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private long id;
+
     @Column(unique=true)
+    @Setter @Getter @NonNull
     private String username;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "loanedTo")
-    @Setter(AccessLevel.NONE)
-    private List<Book> loanedBooks;
+    @Getter
+    private Set<Book> loanedBooks = new HashSet<>();
 
 }

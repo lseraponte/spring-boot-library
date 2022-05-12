@@ -1,14 +1,12 @@
 package com.lseraponte.library.domain.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = { "title", "author_id" })
@@ -16,26 +14,29 @@ import java.util.Set;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private long id;
 
+    @Setter @Getter
     private String title;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
     @JoinColumn (name = "author_id", nullable = false)
+    @Setter @Getter
     private Author author;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "book_category",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    @Setter(AccessLevel.NONE)
-    private Set<Category> categories;
+    @Getter
+    private Set<Category> categories = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "libraryuser_id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn (name = "loanedTo_user_id")
+    @Setter @Getter
     private LibraryUser loanedTo;
 
 }

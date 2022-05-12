@@ -1,24 +1,28 @@
 package com.lseraponte.library.domain.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
 public class Category {
 
     @Id
-    @GeneratedValue
-    @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private long id;
+
     @Column(unique=true)
+    @Getter @Setter
     private String categoryName;
+
     @ManyToMany(mappedBy = "categories")
-    private Set<Book> booksBelonging;
+    @Getter
+    @JsonIgnore
+    private Set<Book> booksBelonging = new HashSet<>();
 
 }
