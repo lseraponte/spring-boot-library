@@ -21,7 +21,7 @@ public class AuthorServiceImpl implements AuthorService {
         Author author = authorRepository.findByFirstNameAndLastName(newAuthor.getFirstName(), newAuthor.getLastName());
         if(author == null)
             author = authorRepository.save(newAuthor);
-        return new ResponseEntity(author, HttpStatus.OK);
+        return new ResponseEntity(author, HttpStatus.CREATED);
     }
 
 }

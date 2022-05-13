@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Harry Potter and the Half-Blood Prince",
+    "author": {
+      "id": 1,
+      "firstName": "J.K.",
+      "lastName": "Rowling"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "categoryName": "Fantasy"
+      }
+    ],
+    "loanedTo": null
+  }
+]
