@@ -1,9 +1,10 @@
 package com.lseraponte.library.service;
 
 import com.lseraponte.library.domain.model.Author;
+import org.springframework.http.ResponseEntity;
 
 public interface AuthorService {
 
-    Author addAuthor(Author author);
+    ResponseEntity addAuthor(Author author);
 
 }

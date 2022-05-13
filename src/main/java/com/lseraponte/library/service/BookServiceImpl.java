@@ -10,6 +10,8 @@ import com.lseraponte.library.web.dto.BooksDto;
 import com.lseraponte.library.web.dto.FullBookDto;
 import com.lseraponte.library.web.dto.BookAuthorDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,7 +34,7 @@ public class BookServiceImpl implements BookService {
     CategoryRepository categoryRepository;
 
     @Override
-    public List<Book> addBook(BooksDto booksDto) {
+    public ResponseEntity addBook(BooksDto booksDto) {
 
         List<Book> savedBooks = new ArrayList<>();
 
@@ -75,11 +77,11 @@ public class BookServiceImpl implements BookService {
 
             }
         }
-        return savedBooks;
+        return new ResponseEntity(savedBooks, HttpStatus.CREATED) ;
     }
 
     @Override
-    public String deleteBook(BookAuthorDto deleteBookDto) {
+    public ResponseEntity deleteBook(BookAuthorDto deleteBookDto) {
 
         Book book = null;
 
@@ -90,10 +92,10 @@ public class BookServiceImpl implements BookService {
 
             if (book != null) {
                 bookRepository.deleteById(book.getId());
-                return book.getTitle() + " deleted.";
+                return new ResponseEntity(book.getTitle() + " deleted.", HttpStatus.OK);
             }
         }
-        return "Book not found";
+        return new ResponseEntity("Book not found", HttpStatus.OK);
     }
 
 }

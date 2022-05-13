@@ -9,6 +9,8 @@ import com.lseraponte.library.domain.model.LibraryUser;
 import com.lseraponte.library.web.dto.BookAuthorDto;
 import com.lseraponte.library.web.dto.LoanReturnBookDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -27,17 +29,17 @@ public class LibraryUserServiceImpl implements LibraryUserService {
     AuthorRepository authorRepository;
 
     @Override
-    public String loanBook(LoanReturnBookDto loanReturnBookDto) {
+    public ResponseEntity loanBook(LoanReturnBookDto loanReturnBookDto) {
 
         LibraryUser user = libraryUserRepository.findByUsername(loanReturnBookDto.getUser());
         if (user == null) {
             user = new LibraryUser(loanReturnBookDto.getUser());
         }
         else if (user.getLoanedBooks().size() > 0)
-            return "Outstanding loaned book for user " + loanReturnBookDto.getUser();
+            return new ResponseEntity("Outstanding loaned book for user " + loanReturnBookDto.getUser(), HttpStatus.FORBIDDEN) ;
 
         if (loanReturnBookDto.getBooks() != null && loanReturnBookDto.getBooks().size() > 3)
-            return "Maximum 3 books allowed per loan";
+            return new ResponseEntity("Maximum 3 books allowed per loan", HttpStatus.FORBIDDEN) ;
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -74,19 +76,19 @@ public class LibraryUserServiceImpl implements LibraryUserService {
         }
 
         libraryUserRepository.save(user);
-        return stringBuilder.toString();
+        return new ResponseEntity(stringBuilder.toString(), HttpStatus.CREATED);
 
     }
 
     @Override
-    public String returnBook(LoanReturnBookDto loanReturnBookDto) {
+    public ResponseEntity returnBook(LoanReturnBookDto loanReturnBookDto) {
 
         LibraryUser user = libraryUserRepository.findByUsername(loanReturnBookDto.getUser());
         if (user == null)
-            return "New user, no books to return";
+            return new ResponseEntity("New user, no books to return", HttpStatus.OK);
 
         else if (user.getLoanedBooks().size() == 0)
-            return "No outstanding loaned books for user " + loanReturnBookDto.getUser();
+            return new ResponseEntity("No outstanding loaned books for user " + loanReturnBookDto.getUser(), HttpStatus.OK);
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -99,11 +101,15 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 
             else {
                 Book book = bookRepository.findByTitleAndAuthor_id(bookAuthorDto.getTitle(), author.getId());
-                if (book == null)
+                if (book == null) {
                     stringBuilder.append("The book " + bookAuthorDto.getTitle() + " wrote by "
-                            +bookAuthorDto.getAuthor() + " does not belong to the Library.");
-                else if (book.getLoanedTo() == null || book.getLoanedTo().getId() != user.getId())
+                            + bookAuthorDto.getAuthor() + " does not belong to the Library.");
+                    continue;
+                }
+                else if (book.getLoanedTo() == null || book.getLoanedTo().getId() != user.getId()) {
                     stringBuilder.append("Book not given to " + user.getUsername() + " doesn't need to be returned \n");
+                    continue;
+                }
 
                 user.getLoanedBooks().remove(book);
                 book.setLoanedTo(null);
@@ -117,7 +123,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
         }
 
         libraryUserRepository.save(user);
-        return stringBuilder.toString();
+        return new ResponseEntity(stringBuilder.toString(), HttpStatus.OK);
 
     }
 }
