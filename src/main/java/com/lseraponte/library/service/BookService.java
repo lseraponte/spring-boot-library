@@ -1,12 +1,14 @@
 package com.lseraponte.library.service;
 
 import com.lseraponte.library.domain.model.Book;
-import com.lseraponte.library.web.dto.AddBookDto;
 import com.lseraponte.library.web.dto.BookAuthorDto;
+import com.lseraponte.library.web.dto.BooksDto;
+
+import java.util.List;
 
 public interface BookService {
 
-    Book addBook (AddBookDto book);
+    List<Book> addBook (BooksDto booksDto);
     String deleteBook (BookAuthorDto deleteBookDto);
 
 }

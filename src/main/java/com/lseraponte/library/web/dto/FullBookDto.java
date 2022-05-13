@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Data
-public class AddBookDto {
+public class FullBookDto {
 
     @NotNull
     private String title;

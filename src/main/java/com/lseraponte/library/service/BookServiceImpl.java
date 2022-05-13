@@ -6,13 +6,16 @@ import com.lseraponte.library.domain.dao.CategoryRepository;
 import com.lseraponte.library.domain.model.Author;
 import com.lseraponte.library.domain.model.Book;
 import com.lseraponte.library.domain.model.Category;
-import com.lseraponte.library.web.dto.AddBookDto;
+import com.lseraponte.library.web.dto.BooksDto;
+import com.lseraponte.library.web.dto.FullBookDto;
 import com.lseraponte.library.web.dto.BookAuthorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,43 +32,50 @@ public class BookServiceImpl implements BookService {
     CategoryRepository categoryRepository;
 
     @Override
-    public Book addBook(AddBookDto bookDto) {
+    public List<Book> addBook(BooksDto booksDto) {
 
-        Book book = null;
+        List<Book> savedBooks = new ArrayList<>();
 
-        Author author = authorRepository.findByFirstNameAndLastName(bookDto.getAuthor().getFirstName(),
-                bookDto.getAuthor().getLastName());
-        if(author != null)
-            book = bookRepository.findByTitleAndAuthor_id(bookDto.getTitle(), author.getId());
+        for (FullBookDto fullBookDto : booksDto.getBooks()) {
+            Book book = null;
 
-        if(book != null)
-            return book;
+            Author author = authorRepository.findByFirstNameAndLastName(fullBookDto.getAuthor().getFirstName(),
+                    fullBookDto.getAuthor().getLastName());
+            if (author != null)
+                book = bookRepository.findByTitleAndAuthor_id(fullBookDto.getTitle(), author.getId());
 
-        else {
+            if (book != null)
+                continue;
 
-            if(author == null)
-                author = new Author(bookDto.getAuthor().getFirstName(), bookDto.getAuthor().getLastName());
+            else {
 
-            book = new Book();
-            book.setTitle(bookDto.getTitle());
-            book.setAuthor(author);
+                if (author == null)
+                    author = new Author(fullBookDto.getAuthor().getFirstName(), fullBookDto.getAuthor().getLastName());
 
-            Set<Category> categories = new HashSet<Category>();
-            Category category;
+                book = new Book();
+                book.setTitle(fullBookDto.getTitle());
+                book.setAuthor(author);
 
-            for (Category bookDtoCategory : bookDto.getCategories()) {
-                category = categoryRepository.findByCategoryName(bookDtoCategory.getCategoryName());
-                if (category == null) {
-                    category = new Category();
-                    category.setCategoryName(bookDtoCategory.getCategoryName());
+                Set<Category> categories = new HashSet<Category>();
+                Category category;
+
+                for (Category bookDtoCategory : fullBookDto.getCategories()) {
+                    category = categoryRepository.findByCategoryName(bookDtoCategory.getCategoryName());
+                    if (category == null) {
+                        category = new Category();
+                        category.setCategoryName(bookDtoCategory.getCategoryName());
+                    }
+                    category.getBooksBelonging().add(book);
+                    categories.add(category);
                 }
-                category.getBooksBelonging().add(book);
-                categories.add(category);
-            }
 
-            book.getCategories().addAll(categories);
-            return bookRepository.save(book);
+                book.getCategories().addAll(categories);
+                savedBooks.add(book);
+                bookRepository.save(book);
+
+            }
         }
+        return savedBooks;
     }
 
     @Override
