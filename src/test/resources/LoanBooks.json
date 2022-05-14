@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Don Quixote",
+    "author": {
+      "firstName": "Miguel",
+      "lastName": "de Cervantes"
+    }
+  },
+  {
+    "title": "A Tale of Two Cities",
+    "author": {
+      "firstName": "Charles",
+      "lastName": "Dickens"
+    }
+  },
+  {
+    "title": "The Lord of the Rings",
+    "author": {
+      "firstName": "J.R.R.",
+      "lastName": "Tolkien"
+    }
+  }
+]

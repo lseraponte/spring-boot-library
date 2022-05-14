@@ -68,7 +68,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
                 book.setLoanedTo(user);
 
                 stringBuilder.append("The Book '" + bookAuthorDto.getTitle() + "' wrote by " +
-                        bookAuthorDto.getAuthor().getFirstName() + bookAuthorDto.getAuthor().getLastName() +
+                        bookAuthorDto.getAuthor().getFirstName() + " " + bookAuthorDto.getAuthor().getLastName() +
                         " has been loaned to " + user.getUsername() + "\n");
 
                 bookRepository.save(book);
@@ -115,7 +115,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
                 book.setLoanedTo(null);
 
                 stringBuilder.append("The Book '" + bookAuthorDto.getTitle() + "' wrote by " +
-                        bookAuthorDto.getAuthor().getFirstName() + bookAuthorDto.getAuthor().getLastName() +
+                        bookAuthorDto.getAuthor().getFirstName() + " " + bookAuthorDto.getAuthor().getLastName() +
                         " has been returned to the Library from " + user.getUsername() + "\n");
 
                 bookRepository.save(book);
