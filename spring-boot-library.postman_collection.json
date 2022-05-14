@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "209bb5cc-2250-4611-ac0d-5a58d1eb4263",
+		"name": "spring-boot-library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Populate with Books",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"books\": \n    [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"Novel\"\n                }\n            ] \n        },\n        {\n            \"title\": \"A Tale of Two Cities\",\n            \"author\": {\n                \"firstName\": \"Charles\",\n                \"lastName\": \"Dickens\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"Historical novel\"\n                }\n            ] \n        },\n        {\n            \"title\": \"The Lord of the Rings\",\n            \"author\": {\n                \"firstName\": \"J.R.R.\",\n                \"lastName\": \"Tolkien\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"High fantasy\"\n                },\n                {\n                    \"categoryName\" : \"Adventure\"\n                }\n            ] \n        },\n        {\n            \"title\": \"The Little Prince\",\n            \"author\": {\n                \"firstName\": \"Antoine\",\n                \"lastName\": \"de Saint-Exupery\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"Fable\"\n                },\n                {\n                    \"categoryName\" : \"Fantasy\"\n                }\n            ] \n        },\n        {\n            \"title\": \"Harry Potter and the Sorcerer's Stone\",\n            \"author\": {\n                \"firstName\": \"J.K.\",\n                \"lastName\": \"Rowling\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"Fantasy\"\n                }\n            ] \n        },\n        {\n            \"title\": \"The Hobbit\",\n            \"author\": {\n                \"firstName\": \"J.R.R.\",\n                \"lastName\": \"Tolkien\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"High fantasy\"\n                },\n                {\n                    \"categoryName\" : \"Juvenile fantasy\"\n                }\n            ] \n        },\n        {\n            \"title\": \"Harry Potter and the Half-Blood Prince\",\n            \"author\": {\n                \"firstName\": \"J.K.\",\n                \"lastName\": \"Rowling\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"Fantasy\"\n                }\n            ] \n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Delete",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Harry Potter and the Half-Blood Prince\",\n    \"author\": {\n        \"firstName\": \"J.K.\",\n        \"lastName\": \"Rowling\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Add",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"books\": \n    [\n        {\n            \"title\": \"Harry Potter and the Half-Blood Prince\",\n            \"author\": {\n                \"firstName\": \"J.K.\",\n                \"lastName\": \"Rowling\"\n            },\n            \"categories\": [\n                {\n                    \"categoryName\" : \"Fantasy\"\n                }\n            ] \n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Loan Too Many",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User One\",\n    \"books\": [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            }\n        },\n        {\n            \"title\": \"A Tale of Two Cities\",\n            \"author\": {\n                \"firstName\": \"Charles\",\n                \"lastName\": \"Dickens\"\n            }\n        },\n        {\n            \"title\": \"The Lord of the Rings\",\n            \"author\": {\n                \"firstName\": \"J.R.R.\",\n                \"lastName\": \"Tolkien\"\n            }\n        },\n        {\n            \"title\": \"The Little Prince\",\n            \"author\": {\n                \"firstName\": \"Antoine\",\n                \"lastName\": \"de Saint-Exupery\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Loan Correct",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User One\",\n    \"books\": [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            }\n        },\n        {\n            \"title\": \"A Tale of Two Cities\",\n            \"author\": {\n                \"firstName\": \"Charles\",\n                \"lastName\": \"Dickens\"\n            }\n        },\n        {\n            \"title\": \"The Lord of the Rings\",\n            \"author\": {\n                \"firstName\": \"J.R.R.\",\n                \"lastName\": \"Tolkien\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Loan With Outstanding (run after correct loan)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User One\",\n    \"books\": [\n        {\n            \"title\": \"The Little Prince\",\n            \"author\": {\n                \"firstName\": \"Antoine\",\n                \"lastName\": \"de Saint-Exupery\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Loan Same - User Two (run after correct loan)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User Two\",\n    \"books\": [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Return Correct",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User One\",\n    \"books\": [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            }\n        },\n        {\n            \"title\": \"A Tale of Two Cities\",\n            \"author\": {\n                \"firstName\": \"Charles\",\n                \"lastName\": \"Dickens\"\n            }\n        },\n        {\n            \"title\": \"The Lord of the Rings\",\n            \"author\": {\n                \"firstName\": \"J.R.R.\",\n                \"lastName\": \"Tolkien\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/return",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"return"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Loan With Not Existing Author",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User One\",\n    \"books\": [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            }\n        },\n        {\n            \"title\": \"The Alchemist\",\n            \"author\": {\n                \"firstName\": \"Paulo\",\n                \"lastName\": \"Coelho\"\n            }\n        },\n        {\n            \"title\": \"The Little Prince\",\n            \"author\": {\n                \"firstName\": \"Antoine\",\n                \"lastName\": \"de Saint-Exupery\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Loan With Not Existing Book",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User One\",\n    \"books\": [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            }\n        },\n        {\n            \"title\": \"Harry Potter and the Order of the Phoenix\",\n            \"author\": {\n                \"firstName\": \"J.K.\",\n                \"lastName\": \"Rowling\"\n            }\n        },\n        {\n            \"title\": \"The Little Prince\",\n            \"author\": {\n                \"firstName\": \"Antoine\",\n                \"lastName\": \"de Saint-Exupery\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book  Return Extra Book",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"User One\",\n    \"books\": [\n        {\n            \"title\": \"Don Quixote\",\n            \"author\": {\n                \"firstName\": \"Miguel\",\n                \"lastName\": \"de Cervantes\"\n            }\n        },\n        {\n            \"title\": \"A Tale of Two Cities\",\n            \"author\": {\n                \"firstName\": \"Charles\",\n                \"lastName\": \"Dickens\"\n            }\n        },\n        {\n            \"title\": \"The Little Prince\",\n            \"author\": {\n                \"firstName\": \"Antoine\",\n                \"lastName\": \"de Saint-Exupery\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/return",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"return"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author Add",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Italo\",\n    \"lastName\": \"Calvino\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/author/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"author",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
